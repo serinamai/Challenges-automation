@@ -43,7 +43,15 @@ public class FrameworkInitiation {
 
 
     public static WebDriver getFirefoxBrowser() {
-        String firefoxPath = System.getProperty("user.dir") + "/src/main/java/Drivers/geckodriver-v0.26.0";
+        String firefoxPath = "";
+        if ( isWindows() ) {
+            firefoxPath = System.getProperty("user.dir") + "/src/main/java/Drivers/geckodriver.exe";
+        } else if ( isMac() ) {
+            firefoxPath = System.getProperty("user.dir") + "/src/main/java/Drivers/geckodriver";
+        } else {
+            // for another OS
+        }
+//        String firefoxPath = System.getProperty("user.dir") + "/src/main/java/Drivers/geckodriver-v0.26.0";
         firefoxPath = firefoxPath.replace("/", File.separator);
         System.setProperty("webdriver.gecko.driver", firefoxPath);
         DesiredCapabilities dcap = new DesiredCapabilities();
@@ -66,9 +74,9 @@ public class FrameworkInitiation {
     public static WebDriver getChromeBrowser() {
         String chromePath = "";
         if ( isWindows() ) {
-            chromePath = System.getProperty("user.dir") + "/src/main/java/Drivers/chromedriverForWin.exe";
+            chromePath = System.getProperty("user.dir") + "/src/main/java/Drivers/chromedriver.exe";
         } else if ( isMac() ) {
-            chromePath = System.getProperty("user.dir") + "/src/main/java/Drivers/chromedriverForMac";
+            chromePath = System.getProperty("user.dir") + "/src/main/java/Drivers/chromedriver";
         } else {
             // for another OS
         }
@@ -128,8 +136,5 @@ public class FrameworkInitiation {
         return extent;
     }
 
-    public void getStepText(Scenario scenario) {
-
-    }
 
 }
