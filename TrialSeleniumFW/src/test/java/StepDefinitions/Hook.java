@@ -57,7 +57,7 @@ public class Hook extends FrameworkInitiation {
         getReportInstance().setExtentTest(extentTest.get());
 
         String projectDir = System.getProperty("user.dir");
-        String filePath = "/src/main/java/Dependencies/global.properties";
+        String filePath = "/src/main/java/Properties/global.properties";
         FileReader reader = new FileReader(projectDir + filePath.replace("/", File.separator));
         Properties prop = new Properties();
         prop.load(reader);
