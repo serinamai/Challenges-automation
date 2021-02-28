@@ -51,7 +51,6 @@ public class FrameworkInitiation {
         } else {
             // for another OS
         }
-//        String firefoxPath = System.getProperty("user.dir") + "/src/main/java/Drivers/geckodriver-v0.26.0";
         firefoxPath = firefoxPath.replace("/", File.separator);
         System.setProperty("webdriver.gecko.driver", firefoxPath);
         DesiredCapabilities dcap = new DesiredCapabilities();
@@ -105,15 +104,17 @@ public class FrameworkInitiation {
 //        extentReport.set(createExtentReport());
 //        reportInstance.set(new Reports(getExtentReport()));
 //    }
+//public void setExtentTest() {
+//    extentTest.set(getExtentReport().createTest("", ""));
+//}
+//
+//    public ExtentTest getExtentTest(){
+//        return extentTest.get();
+//    }
 
     public static Reports getReportInstance() {
         return reportInstance.get();
     }
-
-    public void setExtentTest() {
-        extentTest.set(getExtentReport().createTest("", ""));
-    }
-
 
     public ExtentReports getExtentReport() {
         return extentReport.get();
@@ -135,6 +136,4 @@ public class FrameworkInitiation {
         extent.attachReporter(spark);
         return extent;
     }
-
-
 }
