@@ -13,6 +13,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FrameworkInitiation {
 
@@ -58,13 +60,16 @@ public class FrameworkInitiation {
         FirefoxOptions options = new FirefoxOptions();
 
         options.addPreference("marionette", true);
-        options.addPreference("browser.download.folderList", 1);
-        options.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, 	application/vnd.ms-excel, application/xml, text/xml,application/vnd.ms-excel, application/download, application/octet-stream, text/csv, application/vnd.ms-excel, application/msexcel, application/x-msexcel, application/excel");
-        options.addPreference("browser.download.manager.showWhenStarting", false);
-        options.addPreference("browser.download.manager.focusWhenStarting", false);
-        options.addPreference("browser.helperApps.alwaysAsk.force", false);
-        options.addPreference("pdfjs.disabled", true);
-
+//        options.addPreference("browser.download.folderList", 1);
+//        options.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, 	application/vnd.ms-excel, application/xml, text/xml,application/vnd.ms-excel, application/download, application/octet-stream, text/csv, application/vnd.ms-excel, application/msexcel, application/x-msexcel, application/excel");
+//        options.addPreference("browser.download.manager.showWhenStarting", false);
+//        options.addPreference("browser.download.manager.focusWhenStarting", false);
+//        options.addPreference("browser.helperApps.alwaysAsk.force", false);
+//        options.addPreference("pdfjs.disabled", true);
+        options.addPreference("geo.enabled", false);
+        options.addPreference("geo.provider.use_corelocation", false);
+        options.addPreference("geo.prompt.testing", false);
+        options.addPreference("geo.prompt.testing.allow", false);
         driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
         return driver;

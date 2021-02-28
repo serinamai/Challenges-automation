@@ -3,7 +3,9 @@ package Supports;
 import Reports.Reports;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class SeleniumWrapper {
@@ -58,6 +60,12 @@ public class SeleniumWrapper {
             System.err.println(exception.getMessage());
             throw exception;
         }
+    }
+
+    public void waitUntilElementNotVisible(By locator, Duration timeout){
+        WebDriverWait wait = new WebDriverWait(rwDriver, timeout);
+        wait.until(ExpectedConditions.invisibilityOf(rwDriver.findElement(locator)));
+        reports.logInfo("Wait until element is NOT visible", "Elements by locator: " + locator.toString(), rwDriver);
     }
 
     public String getCurrentURL(){
