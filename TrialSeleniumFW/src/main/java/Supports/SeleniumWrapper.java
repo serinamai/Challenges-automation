@@ -4,6 +4,8 @@ import Reports.Reports;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
 public class SeleniumWrapper {
 
     public WebDriver rwDriver;
@@ -40,8 +42,18 @@ public class SeleniumWrapper {
 
     public boolean isElementPresent(By locator){
         try {
-            reports.logInfo("Check if the element is present", "Element: " + locator.toString(), rwDriver);
+            reports.logInfo("Check if the element is present", "Element by locator: " + locator.toString(), rwDriver);
             return rwDriver.findElements(locator).size() != 0;
+        } catch (NoSuchElementException exception) {
+            System.err.println(exception.getMessage());
+            throw exception;
+        }
+    }
+
+    public List <WebElement> getListWebElementsByLocator(By locator){
+        try {
+            reports.logInfo("Get a list of Web Elements", "Elements by locator: " + locator.toString(), rwDriver);
+            return rwDriver.findElements(locator);
         } catch (NoSuchElementException exception) {
             System.err.println(exception.getMessage());
             throw exception;
