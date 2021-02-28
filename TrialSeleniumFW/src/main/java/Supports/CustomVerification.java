@@ -129,12 +129,12 @@ public class CustomVerification {
 
     }
 
-    public void assertTrue(boolean condition,String mgs){
-        try{
+    public void assertTrue(boolean condition, String mgs) {
+        try {
             Assert.assertTrue(condition);
             reports.logPass(mgs, "");
-        } catch (Error e){
-            reports.logFail(mgs, "");
+        } catch (AssertionError e) {
+            reports.logFail(e.getMessage(), "");
             Assert.fail();
         }
     }

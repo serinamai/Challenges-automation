@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Pages.OpenWeatherPage;
 import Supports.FrameworkInitiation;
 import Pages.GooglePage;
 import Supports.CustomVerification;
@@ -12,19 +13,22 @@ public class UIStepDefinition {
 
     public WebDriver driver = FrameworkInitiation.getDriverInstance();
     public CustomVerification customVerification = new CustomVerification();
-    public GooglePage googlePage = new GooglePage(driver);
+    public OpenWeatherPage openWeatherPage = new OpenWeatherPage(driver);
 
-    @Given("I navigate to default home page")
-    public void iNavigateToDefaultHomePage() throws Exception {
+    @Given("I navigate to Open Weather home page")
+    public void iNavigateToOpenWeatherHomePage() throws Exception {
+        driver.get("https://openweathermap.org");
     }
 
-    @When("I type a text {string} in search box")
-    public void iTypeATextInSearchBox(String searchText) throws Exception {
-        googlePage.searchCriteria(searchText);
+    @When("I search weather by invalid city name {string}")
+    public void iSearchWeatherByInvalidCityName(String searchText) throws Exception {
+        openWeatherPage.searchCriteria(searchText);
     }
 
-    @Then("I should able to search")
-    public void iShouldAbleToSearch() {
-        customVerification.assertTrue(true, "it is TRUE");
+    @Then("it brought to the result page and no data returns")
+    public void itBroughtToTheResultPageAndNoDataReturns() {
+        String currentURL = openWeatherPage.getCurrentURL();
+        customVerification.assertTrue(currentURL.contains("find?q="), "It is landing as expected page");
+        customVerification.assertTrue(!openWeatherPage.isResultTableVisible(), "No data returns");
     }
 }
