@@ -33,15 +33,14 @@ dependencies {
     // https://mvnrepository.com/artifact/com.aventstack/extentreports
     implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.1'
 
-    // https://mvnrepository.com/artifact/com.google.inject.extensions/guice-assistedinject
-    implementation group: 'com.google.inject.extensions', name: 'guice-assistedinject', version: '4.1.0'
-
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '6.0.0'
 }
 
 test {
     useTestNG() {
-//        dependsOn cleanTest
         useDefaultListeners = true
-//        suites "src/TestRunner.xml"
+        suites "TestRunner.xml"
+        jvmArgs(["-Ddataproviderthreadcount=1"])
     }
 }
