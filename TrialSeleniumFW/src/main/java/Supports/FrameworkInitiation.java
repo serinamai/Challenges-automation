@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class FrameworkInitiation {
 
-    public static WebDriver driver;
     protected static ThreadLocal <Reports> reportInstance = new ThreadLocal <Reports>();
     protected static ThreadLocal <WebDriver> webDriver = new ThreadLocal <>();
     protected static ThreadLocal <ExtentTest> extentTest = new ThreadLocal <ExtentTest>();
@@ -27,12 +26,10 @@ public class FrameworkInitiation {
     public static void initWebDriver(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                driver = getChromeBrowser();
-                webDriver.set(driver);
+                webDriver.set(getChromeBrowser());
                 break;
             case "firefox":
-                driver = getFirefoxBrowser();
-                webDriver.set(driver);
+                webDriver.set(getFirefoxBrowser());
                 break;
             default:
                 throw new IllegalStateException("Unexpected browser: " + browserName.toLowerCase());
@@ -55,24 +52,13 @@ public class FrameworkInitiation {
         }
         firefoxPath = firefoxPath.replace("/", File.separator);
         System.setProperty("webdriver.gecko.driver", firefoxPath);
-        DesiredCapabilities dcap = new DesiredCapabilities();
-        dcap.setCapability("pageLoadStrategy", "eager");
         FirefoxOptions options = new FirefoxOptions();
-
         options.addPreference("marionette", true);
-//        options.addPreference("browser.download.folderList", 1);
-//        options.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, 	application/vnd.ms-excel, application/xml, text/xml,application/vnd.ms-excel, application/download, application/octet-stream, text/csv, application/vnd.ms-excel, application/msexcel, application/x-msexcel, application/excel");
-//        options.addPreference("browser.download.manager.showWhenStarting", false);
-//        options.addPreference("browser.download.manager.focusWhenStarting", false);
-//        options.addPreference("browser.helperApps.alwaysAsk.force", false);
-//        options.addPreference("pdfjs.disabled", true);
         options.addPreference("geo.enabled", false);
         options.addPreference("geo.provider.use_corelocation", false);
         options.addPreference("geo.prompt.testing", false);
         options.addPreference("geo.prompt.testing.allow", false);
-        driver = new FirefoxDriver(options);
-        driver.manage().window().maximize();
-        return driver;
+        return new FirefoxDriver(options);
     }
 
     public static WebDriver getChromeBrowser() {
@@ -86,11 +72,7 @@ public class FrameworkInitiation {
         }
         chromePath = chromePath.replace("/", File.separator);
         System.setProperty("webdriver.chrome.driver", chromePath);
-        DesiredCapabilities dcap = new DesiredCapabilities();
-        dcap.setCapability("pageLoadStrategy", "eager");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        return driver;
+        return new ChromeDriver();
     }
 
     public static String OSName() {
@@ -104,18 +86,6 @@ public class FrameworkInitiation {
     public static boolean isMac() {
         return (OSName().indexOf("mac") >= 0);
     }
-
-//    public void setReportInstance() {
-//        extentReport.set(createExtentReport());
-//        reportInstance.set(new Reports(getExtentReport()));
-//    }
-//public void setExtentTest() {
-//    extentTest.set(getExtentReport().createTest("", ""));
-//}
-//
-//    public ExtentTest getExtentTest(){
-//        return extentTest.get();
-//    }
 
     public static Reports getReportInstance() {
         return reportInstance.get();

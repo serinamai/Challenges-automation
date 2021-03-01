@@ -12,13 +12,10 @@ import io.cucumber.plugin.event.PickleStepTestStep;
 import io.cucumber.plugin.event.TestCase;
 import io.restassured.RestAssured;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class Hook extends FrameworkInitiation {
@@ -27,7 +24,7 @@ public class Hook extends FrameworkInitiation {
     private int counter = 0;
 
     @BeforeStep
-    public void logACStep(Scenario scenario) throws NoSuchFieldException, IllegalAccessException {
+    public void logGherkinSteps(Scenario scenario) throws NoSuchFieldException, IllegalAccessException {
         Field f = scenario.getClass().getDeclaredField("delegate");
         f.setAccessible(true);
         TestCaseState tcs = (TestCaseState) f.get(scenario);
@@ -44,7 +41,7 @@ public class Hook extends FrameworkInitiation {
         String currentStep = currentStepDef.getStep().getText();
         String currentGherkin = currentStepDef.getStep().getKeyword();
         reports = reportInstance.get();
-        reports.logAC(currentGherkin + currentStep);
+        reports.logStep(currentGherkin + currentStep);
     }
 
     @AfterStep
@@ -60,10 +57,10 @@ public class Hook extends FrameworkInitiation {
         getReportInstance().setExtentTest(extentTest.get());
         Collection <String> lstTagName = scenario.getSourceTagNames();
         if ( lstTagName.contains("@UI") ) {
-            extentTest.get().assignCategory("UI",new Utils().getGlobalProperties("browser"), System.getProperty("os.name"));
+            extentTest.get().assignCategory("UI", new Utils().getGlobalProperties("browser"), System.getProperty("os.name"));
             initWebDriver(new Utils().getGlobalProperties("browser"));
-            driver = getDriverInstance();
-            driver.get(new Utils().getGlobalProperties("url"));
+            getDriverInstance().manage().window().maximize();
+            getDriverInstance().get(new Utils().getGlobalProperties("url"));
         } else {
             extentTest.get().assignCategory("API");
             String scheme = new Utils().getGlobalProperties("scheme");
@@ -85,8 +82,8 @@ public class Hook extends FrameworkInitiation {
         } else {
             reports.getExtentTest().skip(MarkupHelper.createLabel(scenario.getName() + " Test cases is SKIPPED", ExtentColor.YELLOW));
         }
-        if ( driver != null ) {
-            driver.quit();
+        if ( getDriverInstance() != null ) {
+            getDriverInstance().quit();
         }
         closeReport();
     }

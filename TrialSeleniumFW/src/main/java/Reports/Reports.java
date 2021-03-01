@@ -30,7 +30,7 @@ public class Reports {
         return childNode;
     }
 
-    public void logAC(String description){
+    public void logStep(String description){
         childNode = rootNode.createNode(Scenario.class, description);
     }
 
