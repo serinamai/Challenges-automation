@@ -1,18 +1,18 @@
-This document is a short guideline to get the appropriate resources for all of parts of the challenge.
+This document is a short guideline to get the appropriate resources for all parts of the challenge.
 
-General instruct
+General instruction
 ------------
 
 - PART 1: Test Design and Bug challenges
 
-Please refer the document in this package.
+Please refer the file `Part1 - Test design and bug.docx` in this package.
 
-- Part 2: Automation
+- Part 2: Automation challenges
 
 This repository includes UI and API automation test cases of the challenge. 
 
 
-Instruction
+Automation challenges
 ------------
 Getting Started
 These instructions will get you a copy of the project up and running on your local machine.
