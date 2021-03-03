@@ -31,6 +31,16 @@ public class SeleniumWrapper {
         }
     }
 
+    public void clear(By locator) throws Exception {
+        try {
+            getElementByLocator(locator).clear();
+            reports.logInfo("Clear text in element", "Element: " + locator.toString(), rwDriver);
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+            throw exception;
+        }
+    }
+    
     public void pressKey(By locator, Keys keys){
         try {
             ExpectedConditions.elementToBeClickable(locator);

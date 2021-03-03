@@ -20,7 +20,6 @@ public class Reports {
         this.reports = extentReports;
     }
 
-
     public void setExtentTest(ExtentTest test){
         rootNode = test;
         childNode = test;
@@ -30,7 +29,7 @@ public class Reports {
         return childNode;
     }
 
-    public void logAC(String description){
+    public void logStep(String description){
         childNode = rootNode.createNode(Scenario.class, description);
     }
 
@@ -60,7 +59,6 @@ public class Reports {
     public void logInfo(String stepName, String msg){
         childNode.createNode(stepName).info(MarkupHelper.createLabel(msg, ExtentColor.BLUE));
     }
-
 
     private String captureToBase64(WebDriver webDriver) {
         TakesScreenshot newScreen = (TakesScreenshot) webDriver;
