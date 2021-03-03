@@ -20,25 +20,33 @@ public class OpenWeatherPage extends SeleniumWrapper {
     By tblResult = By.cssSelector("div#forecast_list_ul table");
     By searchRow = By.xpath("//table[contains(@class,'table')]//tr");
     By loader = By.cssSelector("div.owm-loader");
+    int waitTime = 10;
 
     public void searchCriteria(String searchText) throws Exception {
+        clear(searchTextBox);
         type(searchTextBox, searchText);
-        if(new Utils().getGlobalProperties("browser").equalsIgnoreCase("firefox")){
+        if ( new Utils().getGlobalProperties("browser").equalsIgnoreCase("firefox") ) {
             pressKey(searchTextBox, Keys.RETURN);
         } else {
             pressKey(searchTextBox, Keys.ENTER);
         }
-        if(isElementPresent(loader)){
-            waitUntilElementNotVisible(loader, Duration.ofSeconds(10));
+        waitForLoaderInvisible();
+    }
+
+    public void waitForLoaderInvisible() {
+        if ( isElementPresent(loader) ) {
+            waitUntilElementNotVisible(loader, Duration.ofSeconds(waitTime));
         }
     }
 
-    public boolean isResultTableVisible(){
+    public boolean isResultTableVisible() {
         return isElementPresent(tblResult);
     }
 
-    public List <String> getSearchResult(){
+    public List <String> getSearchResult() {
         return getListWebElementsByLocator(searchRow).stream().map(ele -> ele.getText()).collect(Collectors.toList());
     }
+
+
 
 }
