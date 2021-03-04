@@ -1,6 +1,5 @@
 package Supports;
 
-import Reports.Reports;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,7 +39,7 @@ public class SeleniumWrapper {
             throw exception;
         }
     }
-    
+
     public void pressKey(By locator, Keys keys){
         try {
             ExpectedConditions.elementToBeClickable(locator);

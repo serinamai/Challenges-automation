@@ -1,7 +1,7 @@
 package StepDefinitions;
 
 import Pages.OpenWeatherPage;
-import Reports.Reports;
+import Supports.Reports;
 import Supports.CustomVerification;
 import Supports.FrameworkInitiation;
 import io.cucumber.datatable.DataTable;

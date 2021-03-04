@@ -1,10 +1,7 @@
 package Supports;
 
-import Reports.Reports;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.Reporter;
-import org.testng.asserts.SoftAssert;
 
 public class CustomVerification {
 

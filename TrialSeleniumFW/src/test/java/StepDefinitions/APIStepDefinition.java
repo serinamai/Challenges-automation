@@ -1,6 +1,6 @@
 package StepDefinitions;
 
-import Reports.Reports;
+import Supports.Reports;
 import Supports.CustomVerification;
 import Supports.FrameworkInitiation;
 import Supports.Utils;

@@ -1,6 +1,6 @@
 package StepDefinitions;
 
-import Reports.Reports;
+import Supports.Reports;
 import Supports.FrameworkInitiation;
 import Supports.Utils;
 import com.aventstack.extentreports.gherkin.model.Feature;
