@@ -19,7 +19,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 - Java version: 1.8
-- Platform: Windows, Mac
+- Gradle version: 6.8.3
+- Platform: Windows 10, Mac OS X
 - Support browser:
      + Chrome: version 88
      + Firefox: version 86
@@ -27,18 +28,18 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### How to execution
 
+Open the terminal of IDE tool, then type `gradle test -Pthreads=2` and the tests will be executed.
+`-Pthreads` is presented for the number of browsers that we want to be executed.
 
-1. Open TestRunnerClass.java. Location: `TrialSeleniumFW/src/test/java/Runners/TestRunnerClass.java`
-     + Parallel  : @DataProvider(parallel = `true`)
-     + Sequential: @DataProvider(parallel = `false`)
+### How to modify the execution
 
-2. Delegated feature file: Set features in nested `@CucumberOptions`
+1. Delegated feature file: Set features in nested `@CucumberOptions`
 
 For example:
 - Run delegated UI feature file: `features = {"src/test/resources/GUITestCases.feature"}`
 - Run delegated UI feature file. `features = {"src/test/resources/APITestCases.feature"}`
 
-3. Nominate browser: Change the browser set in global.properties file
+2. Nominate browser: Change the browser set in global.properties file
 Location: `TrialSeleniumFW/src/main/java/Properties/global.properties`
 
 It could be set into CHROME, chrome, FIREFOX, firefox
@@ -60,7 +61,7 @@ Feature file -> Step definition -> Page Object -> Selenium Wrapper
 
 4. Selenium Wrapper: wrap up all selenium actions with Try - catch and Report which log info. It is necessary when debugging.
 
-
+P/s: In case, you are using the IntelliJ for execution, then you encounter the error `Test events were not received`, please refer this link (https://stackoverflow.com/questions/57795263/test-events-were-not-received-when-run-tests-using-intellij). Hopefully it could help to fix it.
 
 
 
