@@ -32,7 +32,7 @@ Open the terminal of IDE tool, then type `gradle test` and the tests will be exe
 
 In order to change the number of threads, in `build.gradle` file, change the number set at `Ddataproviderthreadcount`
 
-For example: We want to execute with 2 threads, then `jvmArgs(["-Ddataproviderthreadcount=**2**"])`
+For example: We want to execute with 2 threads, then `jvmArgs(["-Ddataproviderthreadcount=2"])`
 
 ### How to modify the execution
 
