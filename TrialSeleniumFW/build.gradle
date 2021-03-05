@@ -40,6 +40,6 @@ test {
     def testSuite = System.properties.getProperty("testSuite", 'src/TestRunner.xml')
     useTestNG() {
         suites testSuite
-        jvmArgs(["-Ddataproviderthreadcount=${threads}"])
+        jvmArgs(["-Ddataproviderthreadcount=1"])
     }
 }
