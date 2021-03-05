@@ -28,8 +28,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### How to execution
 
-Open the terminal of IDE tool, then type `gradle test -Pthreads=2` and the tests will be executed.
-`-Pthreads` is presented for the number of browsers that we want to be executed.
+Open the terminal of IDE tool, then type `gradle test` and the tests will be executed.
+
+In order to change the number of threads, in `build.gradle` file, change the number set at `Ddataproviderthreadcount`
+
+For example: We want to execute with 2 threads, then `jvmArgs(["-Ddataproviderthreadcount=**2**"])`
 
 ### How to modify the execution
 
